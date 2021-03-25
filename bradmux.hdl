@@ -1,0 +1,13 @@
+/**
+ * Nand gate: out = a Nand b.
+ */
+
+CHIP bradmux {
+    IN a, b, Sel;
+    OUT out;
+    PARTS:
+    Nand(a=b, b=Sel, out=w1);
+    Nand(a=Sel, b=Sel, out=notSel);
+    Nand(a=notSel, b=a, out=w2);
+    Nand(a=w1, b=w2, out=out);
+}
