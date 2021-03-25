@@ -1,0 +1,16 @@
+CHIP bradFullAdder {
+    IN 
+        A, B, Cin;
+    OUT 
+        S, Cout;
+    PARTS:
+        Nand(a=A, b=B, out=w1);
+        Nand(a=A, b=w1, out=w2);
+        Nand(a=w1, b=B, out=w3);
+        Nand(a=w2, b=w3, out=w4);
+        Nand(a=w4, b=Cin, out=w5); // for when we carry over 1
+        Nand(a=w4, b=w5, out=w6);
+        Nand(a=Cin, b=w5, out=w7); // for when we carry over 1
+        Nand(a=w5, b=w7, out=S);
+        Nand(a=w5, b=w1, out=Cout);
+}
