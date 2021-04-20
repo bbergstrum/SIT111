@@ -1,0 +1,11 @@
+CHIP PCCHIP {
+    IN in[16], load, reset, add;
+    OUT out[16];
+
+    PARTS:
+    Inc16(in=feedback, out=increment);
+    Mux16(a=feedback, b=in, sel=add, out=incrementOut);
+    Mux16(a=incrementOut, b=in, sel=load, out=loadOut);
+    Mux16(a=loadOut, b=false, sel=reset, out=resetOut);
+    Register(in=resetOut, load=true, out=out, out=feedback);
+}
