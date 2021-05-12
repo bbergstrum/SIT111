@@ -1,0 +1,12 @@
+//Brad Computer CHIP
+CHIP Computer {
+    IN reset;
+
+    PARTS:
+    ROM32K(address=pcOut, out=instructionOut);
+    CPU(
+        inM=memOut, instruction=instructionOut, reset=reset, 
+        outM=cpuOut, writeM=cpuWrite, addressM=cpuAddress, pc=pcOut
+    );
+    Memory(in=cpuOut, load=cpuWrite, address=cpuAddress, out=memOut);
+}
